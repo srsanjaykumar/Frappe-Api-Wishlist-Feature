@@ -118,7 +118,7 @@ def add_wishlist_items(item_code_user):
 						],
 						as_dict=1,
 					)
-
+	# custom to add the field values 
 	web_item_data["item_code"]= item_code_user
 	web_item_data["website_item"]=web_item_data.get("name")
 	wishlist = frappe.get_doc("Wishlist", "Administrator")
