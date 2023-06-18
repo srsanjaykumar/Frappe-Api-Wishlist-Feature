@@ -16,11 +16,11 @@ class ALLQuestions(Document):
 
 @frappe.whitelist(allow_guest=1)
 def get():
-	allCategoryNames=frappe.get_all("Category1")
+	allCategoryNames=frappe.get_all("Category1",order_by="creation")
 	dict={}
 	for category in allCategoryNames:
 		cat_name=category['name']
-		catdoc=frappe.get_list("ALLQuestions",filters={"category":cat_name});
+		catdoc=frappe.get_list("ALLQuestions",filters={"category":cat_name},order_by="creation");
 		doc_each_quest=[]
 		for cat in catdoc:
 			doc_make_id={}
