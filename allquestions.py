@@ -4,15 +4,16 @@ from frappe import _
 class ALLQuestions(Document):
 	def before_insert(self):
 		if(self.question):
-			dummy=hashlib.md5(self.question.encode()).hexdigest()
+			quest=self.question
+			dummy=hashlib.sha256(quest.encode('utf-8')).hexdigest()[:8]
 			self.name=dummy
 			self.uid=dummy
 		else:
 			frappe.throw(_("Please Fill the Question "))
 	
 	def before_save(self):
-		dummy=hashlib.md5(self.question.encode()).hexdigest()
-		self.uid=dummy
+		quest=self.question		
+		self.uid=hashlib.sha256(quest.encode('utf-8')).hexdigest()[:8]
 
 @frappe.whitelist(allow_guest=1)
 def get():
